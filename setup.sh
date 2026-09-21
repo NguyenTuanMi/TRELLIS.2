@@ -74,6 +74,11 @@ if [ "$NEW_ENV" = true ] ; then
     elif [ "$PLATFORM" = "hip" ] ; then
         pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/rocm6.2.4
     fi
+    conda install -c nvidia/label/cuda-12.4.0 cuda #Installing cuda toolkit 
+    export CUDA_HOME=$CONDA_PREFIX
+    export PATH=$CUDA_HOME/bin:$PATH
+    echo "[CUDA_HOME]:$CUDA_HOME"
+    echo "[PATH]:$PATH"
 fi
 
 if [ "$BASIC" = true ] ; then
@@ -86,7 +91,7 @@ fi
 
 if [ "$FLASHATTN" = true ] ; then
     if [ "$PLATFORM" = "cuda" ] ; then
-        pip install flash-attn==2.7.3
+        pip install flash-attn==2.7.3 --no-build-isolation
     elif [ "$PLATFORM" = "hip" ] ; then
         echo "[FLASHATTN] Prebuilt binaries not found. Building from source..."
         mkdir -p /tmp/extensions
