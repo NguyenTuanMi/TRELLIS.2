@@ -79,6 +79,7 @@ if [ "$NEW_ENV" = true ] ; then
     export PATH=$CUDA_HOME/bin:$PATH
     echo "[CUDA_HOME]:$CUDA_HOME"
     echo "[PATH]:$PATH"
+    pip install psutil ninja packaging
 fi
 
 if [ "$BASIC" = true ] ; then
