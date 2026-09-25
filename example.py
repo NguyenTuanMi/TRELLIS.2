@@ -9,10 +9,12 @@ from trellis2.pipelines import Trellis2ImageTo3DPipeline
 from trellis2.utils import render_utils
 from trellis2.renderers import EnvMap
 import o_voxel
+import imageio.v3 as iio
+img = iio.imread('assets/hdri/forest.exr')
 
 # 1. Setup Environment Map
 envmap = EnvMap(torch.tensor(
-    cv2.cvtColor(cv2.imread('assets/hdri/forest.exr', cv2.IMREAD_UNCHANGED), cv2.COLOR_BGR2RGB),
+    cv2.cvtColor(img, cv2.COLOR_BGR2RGB),
     dtype=torch.float32, device='cuda'
 ))
 
